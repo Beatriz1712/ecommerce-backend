@@ -51,6 +51,10 @@ Para iniciar la aplicación, ejecuta el siguiente comando:
 nodemon index.js
 npm run dev
 ```
+#### `http://localhost:8080/inicio`
+Para entrar a la app
+
+
 
 Falta revisar 
 ```
