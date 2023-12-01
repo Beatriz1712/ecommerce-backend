@@ -21,4 +21,25 @@ ViewsRouter.get("/login", (req, res) => {
     })
 })
 
+ViewsRouter.get("/products", (req, res) => {
+  if (!req.session.email) {
+    res.redirect("/login");
+  }
+/*
+  let allProducts =  prod.getProducts();
+  allProducts = allProducts.map((product) => product.toJSON());
+  const userData = {
+    first_name: req.session.first_name,
+    last_name: req.session.last_name,
+    email: req.session.email,
+    role: req.session.role,
+  };
+
+  res.render("home", {
+    title: "login-passport-github",
+    products: allProducts,
+    user: userData,
+  });*/
+});
+
 export default ViewsRouter

@@ -21,8 +21,8 @@ productsRouter.get("/products", async (req, res) => {
     let allProducts = await product.getProducts()
     allProducts = allProducts.map(product => product.toJSON())
     const userData = {
-        name: req.session.name,
-        surname: req.session.surname,
+        first_name: req.session.first_namename,
+        last_name: req.session.last_namename,
         email: req.session.email,
         role: req.session.role
     }
@@ -38,7 +38,7 @@ productsRouter.get("/products", async (req, res) => {
 productsRouter.get("/products/:id", async (req, res) => {
 
     let productId = req.params.id
-    let prod = await product.getProductById(productId)
+    let prod = await productId.getProductById(productId)
 
     const productDetail = prod.toObject();
 

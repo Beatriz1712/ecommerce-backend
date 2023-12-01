@@ -62,8 +62,8 @@ UserRouter.get("/current", async (req, res) => {
             res.redirect("/login")
         }
         const userData = {
-            name: user.name,
-            surname: user.surname,
+            first_name: user.first_name,
+            last_name: user.last_name,
             age: user.age,
             email: user.email,
             role: user.role

@@ -30,7 +30,7 @@ export async function createProduct(req, res) {
     if (!name || !description || !price || !category || !stock || !thumbnail) {
         return res.send({ status: "error", error: "Incomplete values" })
     }
-    let result = await productModel.create({
+    let result = await prod.create({///oji
         name,
         description,
         price,

@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const userCollection = "users";
 
 const UserSchema = new mongoose.Schema({
-    name: { type: String, required: true, max: 100 },
-    surname: { type: String, required: false, max: 100 },
+    first_name: { type: String, required: true, max: 100 },
+    last_name: { type: String, required: false, max: 100 },
     email: { type: String, required: true, max: 100 },
     age: { type: Number, required: false, max: 100 },
     password: { type: String, required: false, max: 100 },
@@ -60,9 +60,9 @@ export async function registerUser(req, res) {
     }
 
     console.log("Registering user...");
-    const { name, surname, email, password, role } = req.body;
+    const { first_name, last_name, email, password, role } = req.body;
 
-    if (!name || !surname || !email || !password || !role) {
+    if (!first_name || !last_name || !email || !password || !role) {
       console.log("Faltan datos");
       return res.status(400).send("Faltan datos");
     }

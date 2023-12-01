@@ -1,8 +1,8 @@
 <h1>Lista de productos</h1>
 <h2>Bienvenido {{user.email}}</h2>
 <p>Rol: {{user.role}}</p>
-<p>Nombre: {{user.name}}</p>
-<p>Apellido: {{user.surname}}</p>
+<p>Nombre: {{user.first_name}}</p>
+<p>Apellido: {{user.last_name}}</p>
 {{#each products}}
   <div class="divProducto">
     <h2>{{this.name}}</h2>
@@ -12,6 +12,8 @@
     <p> {{this.category}} </p>
     <p> {{this.stock}} </p>
     <img src={{this.thumbnail}} alt="" />
+    <button class="btn-addCart" data-product-id="{{this._id}}">Agregar al carrito</button>
+    <a href="/product/{{this._id}}">Ver detalles</a>
   </div>
 {{/each}}
 

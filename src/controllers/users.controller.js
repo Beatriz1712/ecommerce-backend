@@ -2,9 +2,9 @@ import { UserModel } from "../dao/mongo/user.model.js";
 
 export async function registerUser(req, res) {
     console.log("Registering user...");
-    const { name, surname, email, password, role } = req.body;
+    const { first_name, last_name, email, password, role } = req.body;
 
-    if (!name || !surname || !email || !password || !role) {
+    if (!first_name || !last_name || !email || !password || !role) {
       console.log("Faltan datos");
       return res.status(400).send("Faltan datos");
     }
@@ -27,17 +27,17 @@ export async function loginUser(req, res) {
         let user = req.user
         if (user.role === "admin") {
             req.session.email = user.email
-            req.session.role = user.role
-            req.session.name = user.name
-            req.session.surname = user.surname
+            req.session.role = user.role;
+            req.session.first_name = user.first_name;
+            req.session.last_name = user.last_name;
             req.session.age = user.age;
             req.session.user = user;
             res.redirect("/profile")
         } else {
             req.session.email = user.email
             req.session.role = user.role
-            req.session.name = user.name
-            req.session.surname = user.surname
+            req.session.first_name = user.first_name
+            req.session.last_name = user.last_name;
             req.session.age = user.age;
             req.session.user = user;
             res.redirect("/api/products")
