@@ -1,3 +1,6 @@
+import products from '../services/ProductService.js'
+
+const prod= new products();
 
 export async function getProductMaster(req, res) {
     let sortOrder = req.query.sortOrder || "asc";
@@ -6,13 +9,13 @@ export async function getProductMaster(req, res) {
     let category = req.query.category || "";
     let availability = req.query.availability || "";
 
-    res.send(await products.getProductMaster(page, limit, category, availability, sortOrder))
+    res.send(await prod.getProducts(page, limit, category, availability, sortOrder))
 }
 
 export async function getProductById(req, res) {
     try {
         const prodId = req.params.pid;
-        const productDetails = await products.getProductById(prodId);
+        const productDetails = await prod.getProductById(prodId);
         res.send({ product: productDetails });
     } catch (error) {
         console.error('Error al obtener el producto:', error);
@@ -58,7 +61,7 @@ export async function getProductByLimit(req, res) {
     let limit = parseInt(req.params.limit)
     if (isNaN(limit) || limit <= 0) {
         limit = 10
-    } res.send(await products.getProductByLimit(limit))
+    } res.send(await prod.getProductByLimit(limit))
 }
 
 export async function getProductByPage(req, res) {
@@ -67,11 +70,11 @@ export async function getProductByPage(req, res) {
         page = 1
     }
     const productsPerPage = 1
-    res.send(await products.getProductByPage(page, productsPerPage))
+    res.send(await prod.getProductByPage(page, productsPerPage))
 }
 
 export async function getProductByQuery(req, res) {
     let query = req.params.query
-    res.send(await products.getProductByQuery(query))
+    res.send(await prod.getProductByQuery(query))
 }
 

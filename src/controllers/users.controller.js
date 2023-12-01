@@ -1,14 +1,24 @@
+import { UserModel } from "../dao/mongo/user.model.js";
 
 export async function registerUser(req, res) {
+    console.log("Registering user...");
+    const { name, surname, email, password, role } = req.body;
+
+    if (!name || !surname || !email || !password || !role) {
+      console.log("Faltan datos");
+      return res.status(400).send("Faltan datos");
+    }
     try {
-        console.log("Registering user...");
-        const { name, surname, email, password, role } = req.body;
-        if (!name || !surname || !email || !password || !role) {
-            console.log("Faltan datos");
-            res.status(400).send("Faltan datos");
-        }
+        const existingUser = await UserModel.findOne({ email})
+        if (existingUser){
+            return res.status(400).json({status:"error", error: "Usuario ya registrado"})
+            
+        } 
+        
         res.redirect("/login");
-    } catch (error) { res.status(500).send("Error al registrar usuario: " + error.message); }
+        return;
+    } catch (error)
+     { res.status(500).send("Error al registrar usuario: " + error.message); }
 
 }
 
@@ -30,7 +40,7 @@ export async function loginUser(req, res) {
             req.session.surname = user.surname
             req.session.age = user.age;
             req.session.user = user;
-            res.redirect("/products")
+            res.redirect("/api/products")
         }
         console.log("Session established:", req.session.user);
 

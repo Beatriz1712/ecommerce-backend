@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { registerUser, loginUser, logoutUser, handleGitHubCallback } from "../controllers/users.controller.js";
+import { registerUser, loginUser, logoutUser, handleGitHubCallback } from "../controllers/users.controller.js"
 
 const UserRouter = express.Router()
 

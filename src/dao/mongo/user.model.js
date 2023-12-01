@@ -23,3 +23,57 @@ const UserSchema = new mongoose.Schema({
 })
 
 export const UserModel = mongoose.model(userCollection, UserSchema);
+
+/*
+export async function registerUser(req, res) {
+  try {
+    const existingUser = await UserModel.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      return res.send({ error: "Usuario ya registrado" });
+    }
+
+    console.log("Registering user...");
+    const { name, surname, email, password, role } = req.body;
+
+    if (!name || !surname || !email || !password || !role) {
+      console.log("Faltan datos");
+      return res.status(400).send("Faltan datos");
+    }
+
+    // Aquí puedes realizar las acciones necesarias para el registro en la base de datos
+    // Por ejemplo, crear un nuevo documento con el modelo de usuario y guardarlo
+
+    // Después de realizar el registro, puedes redirigir al usuario a la página de login
+    res.redirect("/login");
+  } catch (error) {
+    res.status(500).send("Error al registrar usuario: " + error.message);
+  }
+}
+*/    
+export async function registerUser(req, res) {
+  try {
+    const existingUser = await UserModel.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      return res.status(400).send({ error: "Usuario ya registrado" });
+    }
+
+    console.log("Registering user...");
+    const { name, surname, email, password, role } = req.body;
+
+    if (!name || !surname || !email || !password || !role) {
+      console.log("Faltan datos");
+      return res.status(400).send("Faltan datos");
+    }
+
+    // Aquí puedes realizar las acciones necesarias para el registro en la base de datos
+    // Por ejemplo, crear un nuevo documento con el modelo de usuario y guardarlo
+
+    // Después de realizar el registro, puedes redirigir al usuario a la página de login
+    res.redirect("/login");
+  } catch (error) {
+    res.status(500).send("Error al registrar usuario: " + error.message);
+  }
+}
+
